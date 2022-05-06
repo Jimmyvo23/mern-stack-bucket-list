@@ -1,21 +1,14 @@
 import express from "express";
 const app = express();
-<<<<<<< HEAD
 const router = express.Router();
-=======
->>>>>>> 97087326e83d574b7ed017a1c12374b63039eb14
 import bucketList from "../models/bucketList";
 
 // router.get("/", (req, res) => {
 //   res.send("App is working");
 // });
 
-<<<<<<< HEAD
 // Route
 router.get("/", (req, res) => {
-=======
-app.get("/", (req, res) => {
->>>>>>> 97087326e83d574b7ed017a1c12374b63039eb14
   bucketList
     .find({})
     .then((data) => {
@@ -26,7 +19,6 @@ app.get("/", (req, res) => {
       console.log("Error: ", daerrorta);
     });
 });
-<<<<<<< HEAD
 
 router.post("/saved", (req, res) => {
   const data = req.body;
@@ -42,21 +34,6 @@ router.post("/saved", (req, res) => {
       res.status(500).json({ msg: "Sorry, interal server error" });
     }
   });
-=======
-
-
-app.post("/saved", (req, res) => {
-  console.log("Body: ", req.body);
-  res.json("We received your data!!!");
-});
-
-app.get("/name", (req, res) => {
-  const data = {
-    username: "Coco",
-    age: 2,
-  };
-  res.json(data);
->>>>>>> 97087326e83d574b7ed017a1c12374b63039eb14
 });
 
 router.delete("/:id", (req, res)=> {

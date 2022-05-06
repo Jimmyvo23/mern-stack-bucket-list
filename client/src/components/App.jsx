@@ -37,8 +37,12 @@ function App() {
     axios
       .post("http://localhost:8080/api/saved", payload)
       .then(() => {
-        alert("Data has been sent to the server");
+        console.log("Data has been sent to the server");
         getBucketList();
+        setTextItem({
+          title: "",
+          content: "",
+        });
       })
       .catch(() => {
         console.log("Internal server error");
@@ -52,34 +56,23 @@ function App() {
         const data = response.data;
         setItems(data);
       })
-      .catch(() => {
+      .catch((err) => {
+        console.log(err)
         alert("Error retreiving data!!!");
       });
   }
 
-  //   function handleDelete(id) {
-  //     axios.delete(`http://localhost8080/api/${items[0]._id}`)
-  //     .then(result => {
-  //       const data = result.json();
-  //       setItems(data)
-  //     })
-  //     .catch(()=> {
-  //       console.log("Error deleting data!!!")
-  //     })
-  //   }
-  // console.log(items[1]._id)
-  // }
-
   function handleDelete(id) {
-    fetch(`http://localhost8080/api/${id}`, {
-      method: "DELETE",
-      headers: {
-        Accept: "application/json",
-        "Content-type": "application/json",
-      },
-    });
+    axios
+      .delete(`http://localhost:8080/api/${id}`)
+      .then(() => {
+        getBucketList();
+      })
+      .catch((err) => {
+        console.log(err)
+        console.log("Error deleting data!!!");
+      });
   }
-  console.log(items._id);
 
   function handleKeyPress(event) {
     if (event.keyCode === 13) {
@@ -101,7 +94,7 @@ function App() {
         <Note
           onDelete={handleDelete}
           key={index}
-          id={items[0]._id}
+          id={todoItem._id}
           title={todoItem.title}
           content={todoItem.content}
         />
